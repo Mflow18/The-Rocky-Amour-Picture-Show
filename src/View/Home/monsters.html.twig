@@ -1,0 +1,23 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}
+Your match !
+{% endblock %}
+
+{% block stylesheet %}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous">
+   <link rel="stylesheet" href="/assets/css/_monsters_style.css">
+{% endblock %}
+
+{% block content %}
+    <h1 class="matchTitle">TON MATCH PARFAIT EST :</h1>
+    <div class="card" style="width: 45rem;">
+        <img src="{{ monster.monster.picture }}" class="card-img-top" alt="Your soulmate">
+        <div class=" card-body">
+        <p class="card-text"> {{ monster.monster.name }} </p>
+    </div>
+    </div>
+
+{% endblock %}
