@@ -22,47 +22,72 @@ class HomeController extends AbstractController
      * @throws \Twig\Error\RuntimeError
      * @throws \Twig\Error\SyntaxError
      */
-    public function index()
+    public function index(): string
     {
-        header("Access-Control-Allow-Origin :*");
         return $this->twig->render('Home/index.html.twig');
     }
 
-    public function form()
+    public function form(): string
     {
-        header("Access-Control-Allow-Origin :*");
-        return $this->twig->render('Home/form.html.twig');
-    }
 
-    public function results()
-    {
-        error_log(print_r($_POST, TRUE));
-        $datas = decode_json($_POST);
-        var_dump($datas);
-        $matchManager = new MatchManager();
-        $lovers = $matchManager->selectMatch();
-        foreach ($lovers as $lover) {
-            $loveUser = 100; // remplacer par $_POST['loveStyle'] etc.
-            $foodUser = 0;
-            $ethicUser = 60;
-            $partyUser = 30;
-            $id = $lover['id'];
-            $loveRate = abs($loveUser - $lover['loveStyle']);
-            $loveMatch = 100 - $loveRate;
-            $foodRate = abs($foodUser - $lover['food']);
-            $foodMatch = 100 - $foodRate;
-            $ethicRate = abs($ethicUser - $lover['ethic']);
-            $ethicMatch = 100 - $ethicRate;
-            $partyRate = abs($partyUser - $lover['partyMonster']);
-            $partyMatch = 100 - $partyRate;
-            $totalMatch = ($loveMatch + $foodMatch + $ethicMatch + $partyMatch) / 4;
+        if ($_SERVER["REQUEST_METHOD"] === "POST") {
+            var_dump($_POST);
+            die();
+            $matchManager = new MatchManager();
+            $lovers = $matchManager->selectMatch();
+            foreach ($lovers as $lover) {
+                $loveUser = $_POST['lovestyle'];
+                $foodUser = $_POST['food'];
+                $ethicUser = $_POST['ethic'];
+                $partyUser = $_POST['partyMonster'];
+                $id = $lover['id'];
+                $loveRate = abs($loveUser - $lover['loveStyle']);
+                $loveMatch = 100 - $loveRate;
+                $foodRate = abs($foodUser - $lover['food']);
+                $foodMatch = 100 - $foodRate;
+                $ethicRate = abs($ethicUser - $lover['ethic']);
+                $ethicMatch = 100 - $ethicRate;
+                $partyRate = abs($partyUser - $lover['partyMonster']);
+                $partyMatch = 100 - $partyRate;
+                $totalMatch = ($loveMatch + $foodMatch + $ethicMatch + $partyMatch) / 4;
 
-            $matchManager->addMatch($totalMatch, $id);
-            $soulmates = $matchManager->selectByMatch();
+                $matchManager->addMatch($totalMatch, $id);
+                $soulmates = $matchManager->selectByMatch();
+            }
+            return $this->twig->render('Home/results.html.twig', ["soulmates" => $soulmates,
+            ]);
+        } else {
+            return $this->twig->render('Home/form.html.twig');
         }
-        header("Access-Control-Allow-Origin :*");
-        return json_encode($_POST);
     }
+
+
+    /* public function results() :string
+     {
+         $matchManager = new MatchManager();
+         $lovers = $matchManager->selectMatch();
+         foreach ($lovers as $lover) {
+             $loveUser = 100; // remplacer par $_POST['loveStyle'] etc.
+             $foodUser = 50;
+             $ethicUser = 0;
+             $partyUser = 60;
+             $id = $lover['id'];
+             $loveRate = abs($loveUser - $lover['loveStyle']);
+             $loveMatch = 100 - $loveRate;
+             $foodRate = abs($foodUser - $lover['food']);
+             $foodMatch = 100 - $foodRate;
+             $ethicRate = abs($ethicUser - $lover['ethic']);
+             $ethicMatch = 100 - $ethicRate;
+             $partyRate = abs($partyUser - $lover['partyMonster']);
+             $partyMatch = 100 - $partyRate;
+             $totalMatch = ($loveMatch + $foodMatch + $ethicMatch + $partyMatch) / 4;
+
+             $matchManager->addMatch($totalMatch, $id);
+             $soulmates = $matchManager->selectByMatch();
+         }
+         return $this->twig->render('Home/results.html.twig', ["soulmates" => $soulmates,
+         ]);
+        } */
 
     public function monsters()
     {
@@ -73,8 +98,5 @@ class HomeController extends AbstractController
         header("Access-Control-Allow-Origin :*");
         return $this->twig->render('Home/monsters.html.twig', ["monster" => $monster,
         ]);
-
-        // header("Content-Type: application/json");
-        // return json_encode($monsters);
     }
 }

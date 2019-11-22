@@ -1,0 +1,10 @@
+body {
+    background-image: url("/assets/images/starry-sky-998641.JPG");
+}
+
+* {
+    font-family: 'Ceviche One', cursive;
+    color: #ba0900;
+    font-size: 30px;
+}
+
