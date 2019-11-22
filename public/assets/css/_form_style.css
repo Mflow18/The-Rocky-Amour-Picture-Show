@@ -1,3 +1,7 @@
+body {
+    background-image: url("/assets/images/starry-sky-998641.JPG");
+}
+
 .questions {
     display: flex;
     flex-direction: column;
