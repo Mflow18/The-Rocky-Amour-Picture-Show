@@ -33,7 +33,6 @@ class MatchManager extends AbstractManager
     public function selectMatch()
     {
         return $this->pdo->query('SELECT id, name, loveStyle, food, ethic, partyMonster, matchRate FROM ' . $this->table)->fetchAll();
-
     }
 
     public function addMatch(int $totalMatch, int $id)
