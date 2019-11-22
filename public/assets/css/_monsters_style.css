@@ -14,4 +14,5 @@ body {
     float: none; /* Added */
     margin-bottom: 10px; /* Added */
     margin-top: 10%;
+    max-width: 50%;
 }
