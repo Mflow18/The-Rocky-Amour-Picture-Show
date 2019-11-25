@@ -1,5 +1,6 @@
 body {
     background-image: url("/assets/images/starrysky.jpg");
+    background-size: cover;
 }
 
 .questions {
