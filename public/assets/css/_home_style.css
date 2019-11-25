@@ -1,0 +1,11 @@
+body {
+    background-image: url("/assets/images/wallpaper.jpg");
+!important;
+    background-size: cover;
+}
+
+.link {
+    display: flex;
+    justify-content: flex-end;
+    color: #ba0900;
+}

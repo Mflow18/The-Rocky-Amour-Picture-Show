@@ -31,15 +31,18 @@ class HomeController extends AbstractController
     {
 
         if ($_SERVER["REQUEST_METHOD"] === "POST") {
-            var_dump($_POST);
-            die();
             $matchManager = new MatchManager();
             $lovers = $matchManager->selectMatch();
             foreach ($lovers as $lover) {
-                $loveUser = $_POST['lovestyle'];
-                $foodUser = $_POST['food'];
-                $ethicUser = $_POST['ethic'];
-                $partyUser = $_POST['partyMonster'];
+                $loveUser = 50 - ($_POST['loveStyle1'] + $_POST['loveStyle2'] + $_POST['loveStyle3'] +
+                        $_POST['loveStyle4'] + $_POST['loveStyle5']);
+
+                $foodUser = 50 - ($_POST['food1'] + $_POST['food2'] + $_POST['food3'] +
+                        $_POST['food4'] + $_POST['food5']);
+                $ethicUser = 50 - ($_POST['ethic1'] + $_POST['ethic2'] + $_POST['ethic3'] +
+                        $_POST['ethic4'] + $_POST['ethic5']);
+                $partyUser = 50 - ($_POST['partyMonster1'] + $_POST['partyMonster2'] + $_POST['partyMonster3'] +
+                        $_POST['partyMonster4'] + $_POST['partyMonster5']);
                 $id = $lover['id'];
                 $loveRate = abs($loveUser - $lover['loveStyle']);
                 $loveMatch = 100 - $loveRate;
