@@ -1,11 +1,34 @@
 body {
-    background-image: url("/assets/images/wallpaper.jpg");
-!important;
-    background-size: cover;
+    background-color: black;
 }
 
-.link {
+html, .button {
     display: flex;
-    justify-content: flex-end;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.link, a {
     color: #ba0900;
+}
+
+@media screen and (min-width: 1200px) {
+
+    body {
+        background-image: url("/assets/images/wallpaper.jpg");
+    !important;
+        background-size: cover;
+    }
+
+    html, .button {
+        display: unset;
+    }
+
+    .link {
+        display: flex;
+        justify-content: flex-end;
+        color: #ba0900;
+    }
 }
