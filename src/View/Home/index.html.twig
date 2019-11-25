@@ -1,5 +1,15 @@
 {% extends 'layout.html.twig' %}
 
+{% block stylesheet %}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous">
+    <link rel="stylesheet" href="/assets/css/_home_style.css">
+{% endblock %}
+
 {% block content %}
-    <h1>Hello Wilder !</h1>
+    <div class="button">
+    <p class="link">Venez découvrir votre âme soeur (si vous l'osez...)</p>
+        <a href="/home/form" class="btn link">Par ici...</a>
+    </div>
 {% endblock %}
